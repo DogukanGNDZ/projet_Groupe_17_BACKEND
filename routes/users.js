@@ -56,22 +56,42 @@ router.post("/", function (req, res, next) {
 });
 
 //création des routes utilisé dans gameScene
+//GET Max Score
 router.get("/getMaxScore", authorize, function(req, res, next){
   res.json({
     score : User.getMaxScore(req.user.username)
   });
 });
 
-router.get("/getNumberOfGame", authorize, function(req, res, next){
+//GET Number Of Games
+router.get("/getNumberOfGames", authorize, function(req, res, next){
   res.json({
-    score : User.getNumberOfGame(req.user.username)
+    score : User.getNumberOfGames(req.user.username)
   });
 });
 
+//SET Max Score
 router.get("/setMaxScore", authorize, function(req, res, next){
   res.json({
-    score : User.getNumberOfGame(req.user.username)
+    score : User.setMaxScore(req.user.username,req.body.score)
   });
+});
+
+//SET Number Of Game
+router.get("/setNumberOfGames", authorize, function(req,res, next){
+  res.json({
+    score : User.setNumberOfGames(req.user.username)
+  });
+});
+
+//va chercher le username de l'utilisateur connecté
+router.get("/:username", function (req, res, next) {
+  const userFound = User.getUserFromList(req.params.username);
+  if (userFound) {
+    return res.json(userFound);
+  } else {
+    return res.status(404).send("ressource not found");
+  }
 });
 
 
