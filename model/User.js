@@ -129,6 +129,19 @@ const fs = require("fs");
         }
         return;
      }
+
+     //Get allMaxscore
+     static getAllUserAndMaxScore(){
+         let userList = getUserListFromFile(FILE_PATH);
+         return userList.map(userEntry =>{
+             return {
+                 username: userEntry.username,
+                 maxscore: userEntry.maxscore  
+             }
+         }).sort((a,b) => b.maxscore - a.maxscore);
+     }
+
+     
  }
 
 

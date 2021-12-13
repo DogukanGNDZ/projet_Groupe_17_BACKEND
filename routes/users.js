@@ -94,5 +94,10 @@ router.get("/:username", function (req, res, next) {
   }
 });
 
+//Get maxscore file
+router.get("/maxscoreBoard",function(req,res){
+  res.json({maxscoreBoard : User.getAllUserAndMaxScore()})
+})
+
 
 module.exports = router;
