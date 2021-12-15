@@ -59,28 +59,28 @@ router.post("/", function (req, res, next) {
 //GET Max Score
 router.get("/getMaxScore", authorize, function(req, res, next){
   res.json({
-    score : User.getMaxScore(req.user.username)
+    maxScore : User.getMaxScore(req.user.username)
   });
 });
 
 //GET Number Of Games
 router.get("/getNumberOfGames", authorize, function(req, res, next){
   res.json({
-    score : User.getNumberOfGames(req.user.username)
+    numberGames : User.getNumberOfGames(req.user.username)
   });
 });
 
 //SET Max Score
-router.get("/setMaxScore", authorize, function(req, res, next){
+router.post("/setMaxScore", authorize, function(req, res, next){
   res.json({
-    score : User.setMaxScore(req.user.username,req.body.score)
+    score : User.setMaxScore(req.body.username,req.body.score)
   });
 });
 
 //SET Number Of Game
 router.get("/setNumberOfGames", authorize, function(req,res, next){
   res.json({
-    score : User.setNumberOfGames(req.user.username)
+    games : User.setNumberOfGames(req.user.username)
   });
 });
 
@@ -95,9 +95,11 @@ router.get("/:username", function (req, res, next) {
 });
 
 //Get maxscore file
-router.get("/maxscoreBoard",function(req,res){
+router.get("/maxscoreBoard",authorize,function(req,res, next){
   res.json({maxscoreBoard : User.getAllUserAndMaxScore()})
 })
+
+//do new js frontend ranked score pannel
 
 
 module.exports = router;

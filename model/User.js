@@ -56,11 +56,7 @@ const fs = require("fs");
                 break;
             }
         }
-        //check si le score de la partie est un nouveau record et set le maxscore si c'est le cas
-        //possible de faire le test dans la gamescene?
-        if(userFound.maxscore<scorePartie) {
-            userFound.maxscore=scorePartie;
-        }
+        userFound.maxscore=scorePartie;        
         // sauver tous les users à nouveau dans users.json
         let data = JSON.stringify(userList); //listisanarrayofobjects
         fs.writeFileSync(FILE_PATH,data);
