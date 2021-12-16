@@ -56,7 +56,9 @@ const fs = require("fs");
                 break;
             }
         }
-        userFound.maxscore=scorePartie;        
+        if(userFound.maxscore<scorePartie){
+            userFound.maxscore=scorePartie;
+        }        
         // sauver tous les users à nouveau dans users.json
         let data = JSON.stringify(userList); //listisanarrayofobjects
         fs.writeFileSync(FILE_PATH,data);
@@ -128,7 +130,8 @@ const fs = require("fs");
 
      //Get allMaxscore
      static getAllUserAndMaxScore(){
-         let userList = getUserListFromFile(FILE_PATH);
+        console.log("t'es arrivé au bout"); 
+        let userList = getUserListFromFile(FILE_PATH);
          return userList.map(userEntry =>{
              return {
                  username: userEntry.username,

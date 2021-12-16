@@ -72,17 +72,21 @@ router.get("/getNumberOfGames", authorize, function(req, res, next){
 
 //SET Max Score
 router.post("/setMaxScore", authorize, function(req, res, next){
-  res.json({
-    score : User.setMaxScore(req.body.username,req.body.score)
-  });
+  User.setMaxScore(req.body.username,req.body.score)
 });
 
 //SET Number Of Game
-router.get("/setNumberOfGames", authorize, function(req,res, next){
-  res.json({
-    games : User.setNumberOfGames(req.user.username)
-  });
+router.post("/setNumberOfGames", authorize, function(req,res, next){
+  User.setNumberOfGames(req.user.username)
 });
+
+
+
+//Get maxscore file
+router.get("/maxscoreBoard",authorize,function(req,res, next){
+  console.log("tes passé dans les users");
+  res.json({maxscoreBoard : User.getAllUserAndMaxScore()})
+})
 
 //va chercher le username de l'utilisateur connecté
 router.get("/:username", function (req, res, next) {
@@ -93,11 +97,6 @@ router.get("/:username", function (req, res, next) {
     return res.status(404).send("ressource not found");
   }
 });
-
-//Get maxscore file
-router.get("/maxscoreBoard",authorize,function(req,res, next){
-  res.json({maxscoreBoard : User.getAllUserAndMaxScore()})
-})
 
 //do new js frontend ranked score pannel
 
