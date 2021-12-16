@@ -55,31 +55,11 @@ router.post("/", function (req, res, next) {
   });
 });
 
-//création des routes utilisé dans gameScene
-//GET Max Score
-router.get("/getMaxScore", authorize, function(req, res, next){
-  res.json({
-    maxScore : User.getMaxScore(req.user.username)
-  });
-});
-
-//GET Number Of Games
-router.get("/getNumberOfGames", authorize, function(req, res, next){
-  res.json({
-    numberGames : User.getNumberOfGames(req.user.username)
-  });
-});
-
 //SET Max Score
 router.post("/setMaxScore", authorize, function(req, res, next){
-  User.setMaxScore(req.body.username,req.body.score)
+ User.setMaxScore(req.body.username,req.body.score)
+ 
 });
-
-//SET Number Of Game
-router.post("/setNumberOfGames", authorize, function(req,res, next){
-  User.setNumberOfGames(req.user.username)
-});
-
 
 
 //Get maxscore file

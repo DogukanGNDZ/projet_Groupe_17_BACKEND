@@ -12,7 +12,6 @@ const fs = require("fs");
          this.password = password;
          this.maxscore = 0;
          //a voir si mis ou pas
-         this.numberofgame = 0;
          //plus de paramètres?
      }
 
@@ -26,7 +25,6 @@ const fs = require("fs");
              email: this.email,
              password: hashedPassword,
              maxscore: this.maxscore,
-             numberofgame: this.numberofgame
          })
          saveUserListToFile(FILE_PATH,userList);
          return true;
@@ -64,54 +62,6 @@ const fs = require("fs");
         fs.writeFileSync(FILE_PATH,data);
      }
      
-     //SET Number Of Game
-     static setNumberOfGames(username){
-        let userList = getUserListFromFile(FILE_PATH);
-        // trouver user associé à username et charger le user
-        let userFound;
-        for (let index = 0; index < userList.length; index++) {
-          if (userList[index].username === username) {
-            userFound = userList[index];
-            console.log(userFound);
-            break;
-          }
-        }
-        userFound.numberofgame=+1;
-        // sauver tous les users à nouveau dans users.json
-        let data = JSON.stringify(userList); //listisanarrayofobjects
-        fs.writeFileSync(FILE_PATH,data);
-     }
-
-     //Get Max Score
-     static getMaxScore(username){
-        // charger la liste d'utilisateurs
-        let userList = getUserListFromFile(FILE_PATH);
-        // trouver user associé à username et charger le user
-        let userFound;
-        for (let index = 0; index < userList.length; index++) {
-            if (userList[index].username === username) {
-                userFound = userList[index];
-                break;
-            }
-        }
-        return userFound.maxscore;    
-     }
-     
-     //Get Number Of Game
-     static getNumberOfGames(username){
-        // charger la liste d'utilisateurs
-        let userList = getUserListFromFile(FILE_PATH);
-        // trouver user associé à username et charger le user
-        let userFound;
-        for (let index = 0; index < userList.length; index++) {
-            if (userList[index].username === username) {
-                userFound = userList[index];
-                break;
-            }
-        }
-        return userFound.numberofgame; 
-     }
-
      //verification si user est déjà dans la user File
      static isUser(email) {
         const userFound = User.getUserFromList(email);
